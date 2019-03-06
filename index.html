@@ -5,41 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>搜索导航小demo</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <header id="ss"></header>
-    <main id="x">
-        <div>
-            <kbd>q</kbd>
-            <kbd>w</kbd>
-            <kbd>e</kbd>
-            <kbd>r</kbd>
-            <kbd>t</kbd>
-            <kbd>y</kbd>
-            <kbd>u</kbd>
-            <kbd>i</kbd>
-            <kbd>o</kbd>
-        </div>
-        <div>
-            <kbd>a</kbd>
-            <kbd>s</kbd>
-            <kbd>d</kbd>
-            <kbd>f</kbd>
-            <kbd>g</kbd>
-            <kbd>h</kbd>
-            <kbd>j</kbd>
-            <kbd>k</kbd>
-            <kbd>l</kbd>
-        </div>
-        <div>
-            <kbd>z</kbd>
-            <kbd>x</kbd>
-            <kbd>c</kbd>
-            <kbd>v</kbd>
-            <kbd>b</kbd>
-            <kbd>n</kbd>
-            <kbd>m</kbd>
-        </div>
+    <header></header>
+    <main style="text-align: center;">
+        <div class="wrapper" id="mainxx"></div>
     </main>
     <footer></footer>
     <script>
@@ -65,8 +36,21 @@
             'z': 'www.zhihu.com',
             'm': 'www.mcdonalds.com.cn'
         }
-        div1 = document.createElement('div')
-        ss.appendChild(div1)
+        index = 0;
+        while(index < keys['length']){  // 0 1 2
+            divxx = document.createElement('div');
+            mainxx.appendChild(divxx);
+            index2 = 0;
+            row = keys[index] //第一数组 第二数组 第三数组
+            while(index2 < row['length']){ // 0~9 0~8 0~6
+                kbdxx = document.createElement('kbd');
+                divxx.appendChild(kbdxx);
+                kbdxx.textContent = row[index2];
+                index2++;
+            }
+            index++;
+        }
+        
     </script>
 </body>
 </html>
