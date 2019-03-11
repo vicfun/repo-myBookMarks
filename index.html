@@ -50,7 +50,11 @@
             }
             index++;
         }
-        
+        document.onkeypress = function(xxx){
+            key = xxx['key']
+            website = hash[key]
+            window.open('http://' + website)
+        }
     </script>
 </body>
 </html>
