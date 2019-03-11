@@ -1,13 +1,26 @@
 *{margin: 0; padding: 0;}
 a{text-decoration: none;}
-kbd{display: inline-block; border: 1px solid teal; width: 2em; height: 2em;
+kbd{display: inline-block; border: 1px solid teal; width: 4em; height: 4em;
     text-transform: uppercase;}
 #mainxx{
     display: inline-block;
 } 
 #mainxx > div:nth-child(2){
-    margin-left: 1em;
-}
-#mainxx > div:nth-child(3){
     margin-left: 2em;
 }
+#mainxx > div:nth-child(3){
+    margin-left: 4em;
+}
+kbd{ position: relative;} 
+kbd > button{
+     position: absolute;
+     right: 0;
+     bottom: 0;
+     border: 1px solid transparent; 
+     outline: none; 
+     background: none;
+     display: none;
+ }
+ kbd:hover > button{
+     display: inline-block;
+ }
