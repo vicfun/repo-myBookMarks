@@ -37,11 +37,10 @@
             'm': 'www.mcdonalds.com.cn'
         }
         //取出 localStorage 中的 zzz 对应的 hash
-       var hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || '');
-       if(hashInLocalStorage){
-        hash = hashInLocalStorage;
-       }
-
+        var hashInLocalStorage = JSON.parse(localStorage.getItem('yyy') || 'null')
+        if (hashInLocalStorage) {
+            hash = hashInLocalStorage;
+        }
         //遍历 keys, 生成 kbd 标签
         index = 0;
         while(index < keys['length']){  // 0 1 2
@@ -60,9 +59,9 @@
                 btnxx.onclick = function(xxx){ //xxx['target']就是用户点击的那个元素
                     key = xxx['target']['id'];// q w e r 
                     x = prompt('给我一个网址');//qq.com
-                    hash[key] = x;//hash[key]变为输入的网址
-                    localStorage.setItem('zzz', JSON.stringify(hash))
-                    console.log(hash)
+                    hash[key] = x;
+                    localStorage.setItem('yyy', JSON.stringify(hash))
+                    console.log(hash);
                 }
                 index2++;
             }
