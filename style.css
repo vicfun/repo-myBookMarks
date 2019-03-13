@@ -2,9 +2,17 @@
 a{text-decoration: none;}
 kbd{display: inline-block; border: 1px solid teal; width: 4em; height: 4em;
     text-transform: uppercase;}
+main{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(./bg1.jpg) no-repeat center;
+    background-size: cover;
+}
 .key{
-    width: 50px;
-    height: 40px;
+    width: 60px;
+    height: 50px;
     border: 1px solid #373737;
     border-radius: 7px;
     background: linear-gradient(to bottom, #292929 0%,#111111 100%);
@@ -21,7 +29,11 @@ kbd{display: inline-block; border: 1px solid teal; width: 4em; height: 4em;
 #main{display: inline-block;} 
 #main > div:nth-child(2){margin-left: -22px;}
 #main > div:nth-child(3){margin-left: -80px;}
-kbd{ position: relative;} 
+kbd{ position: relative;}
+.wrapper{
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
 kbd > button{
      position: absolute;
      right: 0;
@@ -30,5 +42,7 @@ kbd > button{
      outline: none; 
      background: none;
      display: none;
+     color: #c5c5c5;
+     font-size: 5px;
  }
  kbd:hover > button{display: inline-block;}
