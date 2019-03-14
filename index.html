@@ -50,14 +50,16 @@
             index2 = 0;
             row = keys[index] //第一数组 第二数组 第三数组
             while(index2 < row['length']){ // 0~9 0~8 0~6
-                kbd = document.createElement('kbd');
-                div.appendChild(kbd);
-                kbd.textContent = row[index2];
+                kbd = document.createElement('kbd');              
                 kbd.className = 'key';
                 button = document.createElement('button');
                 button.textContent = '编辑';
-                kbd.appendChild(button);
                 button.id = row[index2];
+                img = document.createElement('img')
+                img.src = 'http://' + hash[row[index2]] + '/favicon.ico';
+                span = document.createElement('span');
+                span.textContent = row[index2];
+                span.className = 'text';
                 button.onclick = function(xxx){ //xxx['target']就是用户点击的那个元素
                     key = xxx['target']['id'];// q w e r 
                     x = prompt('给我一个网址');//qq.com
@@ -65,6 +67,10 @@
                     localStorage.setItem('yyy', JSON.stringify(hash))
                     console.log(hash);
                 }
+                kbd.appendChild(span);
+                kbd.appendChild(img);
+                div.appendChild(kbd);
+                kbd.appendChild(button);
                 index2++;
             }
             index++;

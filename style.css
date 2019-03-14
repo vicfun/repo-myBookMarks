@@ -18,11 +18,9 @@ main{
     background: linear-gradient(to bottom, #292929 0%,#111111 100%);
     color: #c5c5c5;
     box-shadow: 0 0 0 1px #1A1B1C, 0 0 0 2px #1F2020, 0 3px 0 2px #080808;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     font-size: 15px;
     font-family: Helvetica;
+    position: relative;
 }
 .row{margin: 20px;}
 .row .key{margin: 0 10px;}
@@ -46,3 +44,15 @@ kbd > button{
      font-size: 5px;
  }
  kbd:hover > button{display: inline-block;}
+ .key img{
+     width: 16px;
+     height: 16px;
+     position: absolute;
+     left: 4px;
+     bottom: 2px;
+ }
+ .key .text{
+    position: absolute;
+    left: 4px;
+    top: 2px;
+ }
