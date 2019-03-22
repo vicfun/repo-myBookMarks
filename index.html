@@ -14,6 +14,7 @@
     </main>
     <footer></footer>
     <script>
+        //1.初始化数据
         var keys = {
             '0': ['q','w','e','r','t','y','u','i','o','p'],
             '1': ['a','s','d','f','g','h','j','k','l'],
@@ -37,33 +38,52 @@
             'm': 'www.mcdonalds.com.cn'
         }
         //取出 localStorage 中的 zzz 对应的 hash
-        var hashInLocalStorage = JSON.parse(localStorage.getItem('yyy') || 'null')
+        var hashInLocalStorage = getFromLocalStorage('yyy')
         if (hashInLocalStorage) {
             hash = hashInLocalStorage;
         }
+
+        function getFromLocalStorage(name){
+            JSON.parse(localStorage.getItem('name') || 'null')
+        }
+        //2.生成键盘
         //遍历 keys, 生成 kbd 标签
-        index = 0;
+        var index = 0;
         while(index < keys['length']){  // 0 1 2
-            div = document.createElement('div');
+            var div = tag('div');
             div.className = 'row'
             main.appendChild(div);
-            index2 = 0;
-            row = keys[index] //第一数组 第二数组 第三数组
+            var index2 = 0;
+            var row = keys[index] //第一数组 第二数组 第三数组
             while(index2 < row['length']){ // 0~9 0~8 0~6
-                kbd = document.createElement('kbd');              
+                var kbd = tag('kbd');              
                 kbd.className = 'key';
-                button = document.createElement('button');
+                var button = tag('button');
                 button.textContent = '编辑';
                 button.id = row[index2];
-                img = document.createElement('img')
-                img.src = 'http://' + hash[row[index2]] + '/favicon.ico';
-                span = document.createElement('span');
+                var img = tag('img')//左下小图标
+                if (hash[row[index2]]) {
+                    img.src = 'http://' + hash[row[index2]] + '/favicon.ico';
+                } else {
+                    img.src = 'https://i.loli.net/2019/03/20/5c91b7d58b75c.png'
+                }
+                //如果图片加载不出来
+                img.onerror = function(xxx) {
+                    xxx.target.src = 'https://i.loli.net/2019/03/20/5c91b7d58b75c.png'
+                }
+                var span = tag('span');
                 span.textContent = row[index2];
                 span.className = 'text';
                 button.onclick = function(xxx){ //xxx['target']就是用户点击的那个元素
-                    key = xxx['target']['id'];// q w e r 
-                    x = prompt('给我一个网址');//qq.com
-                    hash[key] = x;
+                    var button2 = xxx['target'];
+                    var img2 = button2.previousSibling;
+                    var key = button2['id'];// q w e r 
+                    var x = prompt('给我一个网址');//qq.com
+                    hash[key] = x; //hash变更
+                    img2.src = 'http://' + x + '/favicon.ico';
+                    img2.onerror = function(xxx) {
+                    xxx.target.src = 'https://i.loli.net/2019/03/20/5c91b7d58b75c.png'
+                }
                     localStorage.setItem('yyy', JSON.stringify(hash))
                     console.log(hash);
                 }
@@ -75,9 +95,13 @@
             }
             index++;
         }
+        function tag(tagName) {
+            return document.createElement(tagName);
+        }
+        //3.监听键盘
         document.onkeypress = function(xxx){
-            key = xxx['key']
-            website = hash[key]
+            var key = xxx['key']
+            var website = hash[key]
             window.open('http://' + website, '_blank')
         }
     </script>
