@@ -26,15 +26,18 @@
             'w': 'www.weibo.com',
             'e': 'www.ele.me',
             'r': 'www.renren.com',
-            't': 'www.tianya.com',
-            'y': 'www.youtube.com',
+            't': 'www.tencent.com',
+            'y': 'www.yy.com',
             'u': 'www.uc.com',
             'i': 'www.iqiyi.com',
             'o': 'www.opera.com',
             'p': undefined,
             'a': 'www.acfun.tv',
+            'b': 'www.baidu.com',
             's': 'www.sohu.com',
+            'g': 'www.google.cn',
             'z': 'www.zhihu.com',
+            'x': 'www.xunlei.com',
             'm': 'www.mcdonalds.com.cn'
         }
         //取出 localStorage 中的 zzz 对应的 hash
@@ -43,66 +46,76 @@
             hash = hashInLocalStorage;
         }
 
-        function getFromLocalStorage(name){
-            JSON.parse(localStorage.getItem('name') || 'null')
-        }
         //2.生成键盘
         //遍历 keys, 生成 kbd 标签
-        var index = 0;
-        while(index < keys['length']){  // 0 1 2
-            var div = tag('div');
+        for (var index = 0; index < keys['length']; index++){
+            var div = tag('div')
             div.className = 'row'
-            main.appendChild(div);
-            var index2 = 0;
             var row = keys[index] //第一数组 第二数组 第三数组
-            while(index2 < row['length']){ // 0~9 0~8 0~6
-                var kbd = tag('kbd');              
+            for( var index2 = 0;index2 < row['length']; index2++){ // 0~9 0~8 0~6
+                var span = createSpan(row[index2]);
+                var button = createButton(row[index2]);
+                var img = createImage(hash[row[index2]]);//左下小图标
+                var kbd = tag('kbd'); 
+                       
                 kbd.className = 'key';
-                var button = tag('button');
-                button.textContent = '编辑';
-                button.id = row[index2];
-                var img = tag('img')//左下小图标
-                if (hash[row[index2]]) {
-                    img.src = 'http://' + hash[row[index2]] + '/favicon.ico';
-                } else {
-                    img.src = 'https://i.loli.net/2019/03/20/5c91b7d58b75c.png'
-                }
-                //如果图片加载不出来
-                img.onerror = function(xxx) {
-                    xxx.target.src = 'https://i.loli.net/2019/03/20/5c91b7d58b75c.png'
-                }
-                var span = tag('span');
-                span.textContent = row[index2];
-                span.className = 'text';
-                button.onclick = function(xxx){ //xxx['target']就是用户点击的那个元素
-                    var button2 = xxx['target'];
-                    var img2 = button2.previousSibling;
-                    var key = button2['id'];// q w e r 
-                    var x = prompt('给我一个网址');//qq.com
-                    hash[key] = x; //hash变更
-                    img2.src = 'http://' + x + '/favicon.ico';
-                    img2.onerror = function(xxx) {
-                    xxx.target.src = 'https://i.loli.net/2019/03/20/5c91b7d58b75c.png'
-                }
-                    localStorage.setItem('yyy', JSON.stringify(hash))
-                    console.log(hash);
-                }
-                kbd.appendChild(span);
+                kbd.appendChild(span); 
                 kbd.appendChild(img);
-                div.appendChild(kbd);
                 kbd.appendChild(button);
-                index2++;
-            }
-            index++;
+                div.appendChild(kbd);
+                main.appendChild(div);
+            }      
         }
-        function tag(tagName) {
-            return document.createElement(tagName);
-        }
+        
         //3.监听键盘
         document.onkeypress = function(xxx){
             var key = xxx['key']
             var website = hash[key]
             window.open('http://' + website, '_blank')
+        }
+
+        function getFromLocalStorage(name){
+            JSON.parse(localStorage.getItem('name') || 'null')
+        }
+        function tag(tagName) {
+            return document.createElement(tagName);
+        }
+        function createSpan(textContent) {
+            var span = tag('span');
+            span.textContent = textContent;
+            span.className = 'text';
+            return span;
+        }
+        function createButton(id) {
+            var button = tag('button');
+            button.textContent = '编辑';
+            button.id = id;//row[index2] q w e r 
+            button.onclick = function(xxx){ //xxx['target']就是用户点击的那个元素
+                var button2 = xxx['target'];
+                var img2 = button2.previousSibling;
+                var key = button2['id'];// q w e r 
+                var x = prompt('给我一个网址');//qq.com
+                hash[key] = x; //hash变更
+                img2.src = 'http://' + x + '/favicon.ico';
+                img2.onerror = function(xxx) {
+                    xxx.target.src = '//i.loli.net/2019/03/20/5c91b7d58b75c.png'
+                }   
+                localStorage.setItem('yyy', JSON.stringify(hash))
+            }
+            return button;
+        }
+        function createImage(domain) {
+            var img = tag('img')//左下小图标
+                if (domain) {
+                    img.src = 'http://' + domain + '/favicon.ico';
+                } else {
+                    img.src = '//i.loli.net/2019/03/20/5c91b7d58b75c.png'
+                }
+                //如果图片加载不出来
+                img.onerror = function(xxx){
+                    xxx.target.src = '//i.loli.net/2019/03/20/5c91b7d58b75c.png'
+                } 
+            return img;
         }
     </script>
 </body>
